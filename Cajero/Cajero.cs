@@ -21,7 +21,7 @@ namespace Cajero
 
         public Cajero()
         {
-            pathPassword = @"C:\Users\Los Ortegas\source\repos\Cajero\Folder pruebaFile\PwStore";
+            pathPassword = @"C:\Users\Los Ortegas\source\repos\Cajero\Folder pruebaFile\PwStore.txt";
             contraseña = File.ReadAllText(pathPassword);
             saldo = 4000.00f;
             count = 1;
@@ -38,13 +38,15 @@ namespace Cajero
         {
             if (monto == 0 || monto > 500)
             {
-                Console.WriteLine("\nEl monto de deposito excede el limite de deposito por cajero,\n-Monto Min(1)\n-Monto Max(500)");
+                Console.WriteLine("\nEl monto minimo y maximo de deposito por cajero son : -Monto Min(1)\n\t\t\t-Monto Max(500)");
             }
             else
             {
                 String objList = string.Format("Deposito: {2:c}. --> Fecha: {0:d}  Hora: {0:t} Zone: {1}.", dateTime, timeZone, monto);
                 movimientos.Add(objList);
                 this.saldo += monto;
+                Console.Clear();
+                Console.WriteLine($"\nHas depositado: {monto:c}");
             }
         }
 
@@ -68,13 +70,9 @@ namespace Cajero
             }
         }
 
-        public void ChangePassword(string newPassword)
-        {
-            Console.WriteLine("Ingrese una nueva contraseña");
-            File.WriteAllText(pathPassword, newPassword);
+        public void ChangePassword(string newPassword) => File.WriteAllText(pathPassword, newPassword);
 
-        }
-        public void ConsultMoving() => movimientos.ForEach(moves => Console.WriteLine("{1}.- {0}\n", moves, count++));
+        public void ConsultMoving() => movimientos.ForEach(moves => Console.WriteLine("\n {1}.- {0}", moves, count++));
 
         public bool VerificacionDeContraseña(string contraseñaIn) => contraseñaIn == contraseña;
 

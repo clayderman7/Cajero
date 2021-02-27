@@ -10,7 +10,7 @@ namespace Cajero
 {
     class Program
     {
-        static readonly string pathPass = @"C:\Users\Los Ortegas\source\repos\Cajero\Folder pruebaFile\PwStore";
+
         static int intentos = 3;
         static bool check = false;
         private static readonly Cajero usuario = new Cajero();
@@ -19,10 +19,9 @@ namespace Cajero
         {
 
             Console.CursorSize = 10;
-            Console.SetBufferSize(72, 18);
-            Console.SetWindowSize(80, 20);
-            Console.Title = "Bank Thief International";
-            File.WriteAllText(pathPass, "2315");
+            Console.SetWindowSize(100, 30);
+            Console.ForegroundColor = ConsoleColor.Cyan;
+            Console.Title = "Bank Latín International";
 
             do
             {
@@ -33,7 +32,7 @@ namespace Cajero
                 if (check) break;
 
                 intentos--;
-                Console.WriteLine("Contraseña incorrecta.  Intentos restantes {0}.\nPresione Enter para Reintentar.", intentos);
+                Console.WriteLine("Contraseña incorrecta.  Intentos restantes {0}.\n\nPresione Enter para Reintentar.", intentos);
                 Console.ReadKey();
 
             } while (intentos != 0);
@@ -60,13 +59,14 @@ namespace Cajero
             {
                 Console.Clear();
                 Console.ForegroundColor = ConsoleColor.Cyan;
-                // Console.WriteLine("\n***{0}***\n\n1.- {1}\n\n2.- {2}\n\n3.- {3}\n\n4.- {4}\n ", menu, option1, option2, option3, option4);
+
                 string path = @"C:\Users\Los Ortegas\source\repos\Cajero\Folder pruebaFile\PruebaFile.txt";
                 string blog = File.ReadAllText(path);
                 Console.WriteLine(blog);
 
-                //Console.Write("Seleccione una opcion: [_] ");
-                Console.SetCursorPosition(32, 16);
+                // Situando el cursor en: Seleccione una opcion: [_]  
+                Console.SetCursorPosition(48, 15);
+
                 ckey = Console.ReadKey(true);
 
                 if (ckey.Key == ConsoleKey.D1)
@@ -112,8 +112,17 @@ namespace Cajero
                 else if (ckey.Key == ConsoleKey.D4)
                 {
                     Console.Clear();
-                    Console.ForegroundColor = ConsoleColor.DarkMagenta;
+                    Console.ForegroundColor = ConsoleColor.DarkCyan;
                     usuario.ConsultMoving();
+                    Console.ReadKey();
+                }
+                else if (ckey.Key == ConsoleKey.D5)
+                {
+                    Console.Clear();
+                    Console.ForegroundColor = ConsoleColor.Cyan;
+                    Console.WriteLine("Ingrese una nueva contraseña");
+                    usuario.ChangePassword(Console.ReadLine());
+                    Console.WriteLine("Cambio de contraseña exitoso.");
                     Console.ReadKey();
                 }
                 else if (ckey.Key == ConsoleKey.D6)
@@ -123,7 +132,7 @@ namespace Cajero
                     break;
                 }
 
-            } while (ckey.Key != ConsoleKey.D4);
+            } while (ckey.Key != ConsoleKey.D6);
 
         }
     }
