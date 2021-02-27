@@ -11,12 +11,6 @@ namespace Cajero
     class Program
     {
         static readonly string pathPass = @"C:\Users\Los Ortegas\source\repos\Cajero\Folder pruebaFile\PwStore";
-        const string
-            menu = "Bienvenido al Cajero",
-            option1 = "Retirar",
-            option2 = "Consultar Saldo",
-            option3 = "Consultar Movimientos",
-            option4 = "Salir";
         static int intentos = 3;
         static bool check = false;
         private static readonly Cajero usuario = new Cajero();
