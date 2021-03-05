@@ -10,30 +10,40 @@ namespace Cajero
 {
     class Program
     {
+        static Program()
+        {
+            intentos = 3;
+            check = false;
+            usuario = new Cajero();
+            pantalla = new PantallaText();
+            frameScreenPath = @"C:\Users\Los Ortegas\source\repos\Cajero\Folder pruebaFile\MarcoPantalla.txt";
+        }
 
-        static int intentos = 3;
-        static bool check = false;
-        private static readonly Cajero usuario = new Cajero();
+        private static readonly string frameScreenPath;
+        private static int intentos;
+        static bool check;
+        private static readonly Cajero usuario;
+        private static readonly PantallaText pantalla;
 
-        static void Main(string[] args)
+
+        static async Task Main(string[] args)
         {
 
-            Console.CursorSize = 10;
-            Console.SetWindowSize(100, 30);
-            Console.ForegroundColor = ConsoleColor.Cyan;
-            Console.Title = "Bank Latín International";
-
+            pantalla.SettingsConsole();
+            
             do
             {
                 Console.Clear();
-                Console.WriteLine("\n*******Ingrese los 4 digitos de su contraseña*******\n");
+
+                await SimpleReadAsyncWindows();
+
+                pantalla.printTextInputPassword();
 
                 check = usuario.VerificacionDeContraseña(Console.ReadLine());
                 if (check) break;
 
                 intentos--;
-                Console.WriteLine("Contraseña incorrecta.  Intentos restantes {0}.\n\nPresione Enter para Reintentar.", intentos);
-                Console.ReadKey();
+                pantalla.printWrongPassword(intentos);                
 
             } while (intentos != 0);
 
@@ -44,7 +54,7 @@ namespace Cajero
                 default:
                     Menu();
                     Console.ForegroundColor = ConsoleColor.Yellow;
-                    Console.WriteLine("\n\t¡Que tenga un buen dia!");
+                    Console.WriteLine("!Que tenga un buen dia!");
                     Console.ReadKey();
                     break;
             }
@@ -60,9 +70,9 @@ namespace Cajero
                 Console.Clear();
                 Console.ForegroundColor = ConsoleColor.Cyan;
 
-                string path = @"C:\Users\Los Ortegas\source\repos\Cajero\Folder pruebaFile\PruebaFile.txt";
-                string blog = File.ReadAllText(path);
-                Console.WriteLine(blog);
+                string path = @"C:\Users\Los Ortegas\source\repos\Cajero\Folder pruebaFile\MenuOptions.txt";
+                string screemOptions = File.ReadAllText(path);
+                Console.WriteLine(screemOptions);
 
                 // Situando el cursor en: Seleccione una opcion: [_]  
                 Console.SetCursorPosition(48, 15);
@@ -71,24 +81,27 @@ namespace Cajero
 
                 if (ckey.Key == ConsoleKey.D1)
                 {
-                    Console.Clear();
-                    Console.ForegroundColor = ConsoleColor.DarkRed;
-                    Console.WriteLine("\nIngrese el monto de retiro.");
+                    Console.Clear();                    
+                    string pahtRetiro = @"C:\Users\Los Ortegas\source\repos\Cajero\Folder pruebaFile\Option1.txt";
+                    string screenWithdraw = File.ReadAllText(pahtRetiro);
+                    Console.WriteLine(screenWithdraw);
+
                     try
                     {
+                        Console.SetCursorPosition(33, 7);
                         usuario.Withdraw(double.Parse(Console.ReadLine()));
                         Console.ReadKey();
                     }
                     catch (FormatException)
                     {
-                        Console.WriteLine("Dato invalido");
+                        Console.SetCursorPosition(28, 7);
+                        Console.Write("Dato invalido!");
                         Console.ReadKey();
                     }
                 }
                 else if (ckey.Key == ConsoleKey.D2)
                 {
-                    Console.Clear();
-                    Console.ForegroundColor = ConsoleColor.Green;
+                    Console.Clear();                    
                     Console.WriteLine("\nIngrese el monto de Deposito. Min( 1$ ) Max( $500 )\n");
                     try
                     {
@@ -104,8 +117,7 @@ namespace Cajero
                 }
                 else if (ckey.Key == ConsoleKey.D3)
                 {
-                    Console.Clear();
-                    Console.ForegroundColor = ConsoleColor.DarkGreen;
+                    Console.Clear();                    
                     Console.WriteLine("\nSu saldo es: {0:c}\n", usuario.GetSaldo());
                     Console.ReadKey();
                 }
@@ -135,6 +147,16 @@ namespace Cajero
             } while (ckey.Key != ConsoleKey.D6);
 
         }
+
+        
+        static async Task SimpleReadAsyncWindows()
+        {
+            
+            string screenPw = await File.ReadAllTextAsync(frameScreenPath);
+            Console.WriteLine(screenPw);
+                     
+        }
+
     }
 
 }
