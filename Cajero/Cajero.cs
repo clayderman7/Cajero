@@ -79,13 +79,13 @@ namespace Cajero
         {
             int row = 4;
             foreach (string moves in movimientos)
-            { 
+            {
                 Console.Write("{1}.- {0}", moves, count++);
-                Console.SetCursorPosition(4, row+=2);
+                Console.SetCursorPosition(4, row += 2);
             }
         }
 
-        public void ChangePassword(string newPassword) => File.WriteAllText(pathPassword, newPassword);        
+        public void ChangePassword(string newPassword) => File.WriteAllText(pathPassword, newPassword);
         public bool VerificacionDeContraseña(string contraseñaIn) => contraseñaIn == contraseña;
 
     }

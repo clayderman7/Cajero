@@ -11,16 +11,14 @@ namespace Cajero
             pantalla = new PantallaText();
 
         }
-
-        private const ConsoleColor yellow = ConsoleColor.Yellow;
-        private static readonly PantallaText pantalla;
-        private static int intentos;
+        
+        static readonly PantallaText pantalla;
+        static int intentos;
         static bool check;
 
-
+        // *************Password initial: 2020*****************
         static void Main(string[] args)
-        {
-
+        {            
             pantalla.SettingsConsole();
 
             do
@@ -38,10 +36,10 @@ namespace Cajero
 
             switch (intentos)
             {
-                case 0:
-                    Console.ForegroundColor = yellow;
+                case 0:                    
                     Console.SetCursorPosition(4, 18);
-                    Console.WriteLine("Ha excedido el numero de intentos."); break;
+                    Console.WriteLine("Ha excedido el numero de intentos."); 
+                    break;
 
                 default:
                     MenuAction();
@@ -50,7 +48,6 @@ namespace Cajero
             }
 
         }
-
         static void MenuAction()
         {
             ConsoleKeyInfo ckey;
@@ -58,7 +55,6 @@ namespace Cajero
             do
             {
                 pantalla.PrintTextMenu();
-
                 ckey = Console.ReadKey(true);
 
                 switch (ckey.Key)
@@ -117,7 +113,6 @@ namespace Cajero
                         Console.Write("Cambio de contraseña exitoso.");
                         Console.ReadKey();
                         break;
-
                 }
 
             } while (ckey.Key != ConsoleKey.D6);

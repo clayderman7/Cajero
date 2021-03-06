@@ -5,8 +5,7 @@ namespace Cajero
 {
     class PantallaText : Cajero
     {
-        private const ConsoleColor cyan = ConsoleColor.Cyan;
-        private const ConsoleColor yellow = ConsoleColor.Yellow;
+        private readonly ConsoleColor yellow;
         private readonly string pathScreenMenu;
         private readonly string screenOptions;
         private readonly string screenFrame;
@@ -17,13 +16,14 @@ namespace Cajero
             pathScreenMenu = @"C:\Users\Los Ortegas\source\repos\Cajero\Folder pruebaFile\MenuOptions.txt";
             screenFrame = File.ReadAllText(frameScreenPath);
             screenOptions = File.ReadAllText(pathScreenMenu);
+            yellow = ConsoleColor.Yellow;
             Console.WriteLine("Iniciando pantalla!");
 
         }
 
         public void SettingsConsole()
         {
-            Console.CursorSize = 10;            
+            Console.CursorSize = 10;
             Console.SetWindowSize(80, 20);
             Console.ForegroundColor = yellow;
             Console.Title = "Bank International Console";
@@ -63,7 +63,7 @@ namespace Cajero
 
         public void PrintExitMassage()
         {
-            Console.Clear();            
+            Console.Clear();
             Console.Write(screenFrame);
             Console.SetCursorPosition(19, 8);
             Console.Write("Gracias por usar nuestros servicios");
