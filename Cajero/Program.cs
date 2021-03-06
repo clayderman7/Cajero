@@ -4,7 +4,7 @@ using System.Threading.Tasks;
 using System.Text;
 using System.Linq;
 using System.IO;
-
+using System.Threading;
 
 namespace Cajero
 {
@@ -13,37 +13,32 @@ namespace Cajero
         static Program()
         {
             intentos = 3;
-            check = false;
-            usuario = new Cajero();
+            check = false;            
             pantalla = new PantallaText();
-            frameScreenPath = @"C:\Users\Los Ortegas\source\repos\Cajero\Folder pruebaFile\MarcoPantalla.txt";
+            
         }
-
-        private static readonly string frameScreenPath;
+              
+        private static readonly PantallaText pantalla;
         private static int intentos;
         static bool check;
-        private static readonly Cajero usuario;
-        private static readonly PantallaText pantalla;
 
 
-        static async Task Main(string[] args)
+        static void Main(string[] args)
         {
 
             pantalla.SettingsConsole();
             
             do
             {
-                Console.Clear();
+                
+                pantalla.PrintScreenFrame();
+                pantalla.PrintTextInputPassword();
 
-                await SimpleReadAsyncWindows();
-
-                pantalla.printTextInputPassword();
-
-                check = usuario.VerificacionDeContraseña(Console.ReadLine());
+                check = pantalla.VerificacionDeContraseña(Console.ReadLine());
                 if (check) break;
 
                 intentos--;
-                pantalla.printWrongPassword(intentos);                
+                pantalla.PrintWrongPassword(intentos);
 
             } while (intentos != 0);
 
@@ -51,111 +46,93 @@ namespace Cajero
             {
                 case 0:
                     Console.WriteLine("\nHa excedido el numero de intentos."); break;
+
                 default:
-                    Menu();
-                    Console.ForegroundColor = ConsoleColor.Yellow;
-                    Console.WriteLine("!Que tenga un buen dia!");
-                    Console.ReadKey();
+                    MenuAction();
+                    pantalla.PrintExitMassage();
+
                     break;
             }
 
         }
 
-        static void Menu()
+        static void MenuAction()
         {
             ConsoleKeyInfo ckey;
-
+            
             do
             {
-                Console.Clear();
-                Console.ForegroundColor = ConsoleColor.Cyan;
-
-                string path = @"C:\Users\Los Ortegas\source\repos\Cajero\Folder pruebaFile\MenuOptions.txt";
-                string screemOptions = File.ReadAllText(path);
-                Console.WriteLine(screemOptions);
-
-                // Situando el cursor en: Seleccione una opcion: [_]  
-                Console.SetCursorPosition(48, 15);
+                pantalla.PrintTextMenu();
 
                 ckey = Console.ReadKey(true);
+                
+                switch (ckey.Key)
+                {
+                    case ConsoleKey.D1:
 
-                if (ckey.Key == ConsoleKey.D1)
-                {
-                    Console.Clear();                    
-                    string pahtRetiro = @"C:\Users\Los Ortegas\source\repos\Cajero\Folder pruebaFile\Option1.txt";
-                    string screenWithdraw = File.ReadAllText(pahtRetiro);
-                    Console.WriteLine(screenWithdraw);
+                            pantalla.PrintSelected(ckey);
 
-                    try
-                    {
-                        Console.SetCursorPosition(33, 7);
-                        usuario.Withdraw(double.Parse(Console.ReadLine()));
-                        Console.ReadKey();
-                    }
-                    catch (FormatException)
-                    {
-                        Console.SetCursorPosition(28, 7);
-                        Console.Write("Dato invalido!");
-                        Console.ReadKey();
-                    }
-                }
-                else if (ckey.Key == ConsoleKey.D2)
-                {
-                    Console.Clear();                    
-                    Console.WriteLine("\nIngrese el monto de Deposito. Min( 1$ ) Max( $500 )\n");
-                    try
-                    {
-                        usuario.Deposit(double.Parse(Console.ReadLine()));
-                        Console.ReadKey();
-                    }
-                    catch (FormatException)
-                    {
-                        Console.WriteLine("Dato invalido");
-                        Console.ReadKey();
-                    }
+                            try
+                            {                                
+                                pantalla.Withdraw(double.Parse(Console.ReadLine()));
+                                Console.ReadKey();
+                            }
+                            catch (FormatException)
+                            {
+                                Console.SetCursorPosition(29, 7);
+                                Console.Write("Dato invalido!");
+                                Console.ReadKey();
+                            }
+                            break;
+
+                    case ConsoleKey.D2:
+
+                            pantalla.PrintSelected(ckey);
+
+                            try
+                            {
+                                pantalla.Deposit(double.Parse(Console.ReadLine()));
+                                Console.ReadKey();
+                            }
+                            catch (FormatException)
+                            {
+                                Console.SetCursorPosition(29, 7);
+                                Console.Write("Dato invalido");
+                                Console.ReadKey();
+                            }
+                            break;
+
+                    case ConsoleKey.D3:
+                                                    
+                            pantalla.PrintSelected(ckey);
+                            pantalla.GetSaldo();
+                            Console.ReadKey();
+                            break;
+
+                    case ConsoleKey.D4:
+                                                    
+                            pantalla.PrintSelected(ckey);
+                            pantalla.ConsultMoving();
+                            Console.ReadKey();
+                            break;
+
+                    case ConsoleKey.D5:
+
+                            pantalla.PrintSelected(ckey);
+                            pantalla.ChangePassword(Console.ReadLine());
+                            Console.SetCursorPosition(22, 8);
+                            Console.Write("Cambio de contraseña exitoso.");
+                            Console.ReadKey();
+                            break;
 
                 }
-                else if (ckey.Key == ConsoleKey.D3)
-                {
-                    Console.Clear();                    
-                    Console.WriteLine("\nSu saldo es: {0:c}\n", usuario.GetSaldo());
-                    Console.ReadKey();
-                }
-                else if (ckey.Key == ConsoleKey.D4)
-                {
-                    Console.Clear();
-                    Console.ForegroundColor = ConsoleColor.DarkCyan;
-                    usuario.ConsultMoving();
-                    Console.ReadKey();
-                }
-                else if (ckey.Key == ConsoleKey.D5)
-                {
-                    Console.Clear();
-                    Console.ForegroundColor = ConsoleColor.Cyan;
-                    Console.WriteLine("Ingrese una nueva contraseña");
-                    usuario.ChangePassword(Console.ReadLine());
-                    Console.WriteLine("Cambio de contraseña exitoso.");
-                    Console.ReadKey();
-                }
-                else if (ckey.Key == ConsoleKey.D6)
-                {
-                    Console.Clear();
-                    Console.ResetColor();
-                    break;
-                }
-
+               
             } while (ckey.Key != ConsoleKey.D6);
 
         }
 
+
         
-        static async Task SimpleReadAsyncWindows()
-        {
-            
-            string screenPw = await File.ReadAllTextAsync(frameScreenPath);
-            Console.WriteLine(screenPw);
-                     
-        }
 
     }
 

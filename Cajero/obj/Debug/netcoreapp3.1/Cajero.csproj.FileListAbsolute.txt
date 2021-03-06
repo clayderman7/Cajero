@@ -11,3 +11,17 @@ C:\Users\Los Ortegas\source\repos\Cajero\Cajero\bin\Debug\netcoreapp3.1\Cajero.p
 C:\Users\Los Ortegas\source\repos\Cajero\Cajero\obj\Debug\netcoreapp3.1\Cajero.dll
 C:\Users\Los Ortegas\source\repos\Cajero\Cajero\obj\Debug\netcoreapp3.1\Cajero.pdb
 C:\Users\Los Ortegas\source\repos\Cajero\Cajero\obj\Debug\netcoreapp3.1\Cajero.genruntimeconfig.cache
+C:\Users\Los Ortegas\source\repos\Cajero\Cajero\bin\Debug\netcoreapp3.1\Microsoft.EntityFrameworkCore.dll
+C:\Users\Los Ortegas\source\repos\Cajero\Cajero\bin\Debug\netcoreapp3.1\Microsoft.EntityFrameworkCore.Abstractions.dll
+C:\Users\Los Ortegas\source\repos\Cajero\Cajero\bin\Debug\netcoreapp3.1\Microsoft.Extensions.Caching.Abstractions.dll
+C:\Users\Los Ortegas\source\repos\Cajero\Cajero\bin\Debug\netcoreapp3.1\Microsoft.Extensions.Caching.Memory.dll
+C:\Users\Los Ortegas\source\repos\Cajero\Cajero\bin\Debug\netcoreapp3.1\Microsoft.Extensions.DependencyInjection.dll
+C:\Users\Los Ortegas\source\repos\Cajero\Cajero\bin\Debug\netcoreapp3.1\Microsoft.Extensions.DependencyInjection.Abstractions.dll
+C:\Users\Los Ortegas\source\repos\Cajero\Cajero\bin\Debug\netcoreapp3.1\Microsoft.Extensions.Logging.dll
+C:\Users\Los Ortegas\source\repos\Cajero\Cajero\bin\Debug\netcoreapp3.1\Microsoft.Extensions.Logging.Abstractions.dll
+C:\Users\Los Ortegas\source\repos\Cajero\Cajero\bin\Debug\netcoreapp3.1\Microsoft.Extensions.Options.dll
+C:\Users\Los Ortegas\source\repos\Cajero\Cajero\bin\Debug\netcoreapp3.1\Microsoft.Extensions.Primitives.dll
+C:\Users\Los Ortegas\source\repos\Cajero\Cajero\bin\Debug\netcoreapp3.1\System.Collections.Immutable.dll
+C:\Users\Los Ortegas\source\repos\Cajero\Cajero\bin\Debug\netcoreapp3.1\System.ComponentModel.Annotations.dll
+C:\Users\Los Ortegas\source\repos\Cajero\Cajero\bin\Debug\netcoreapp3.1\System.Diagnostics.DiagnosticSource.dll
+C:\Users\Los Ortegas\source\repos\Cajero\Cajero\obj\Debug\netcoreapp3.1\Cajero.csproj.CopyComplete
