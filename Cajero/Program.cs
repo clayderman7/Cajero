@@ -1,10 +1,4 @@
 ﻿using System;
-using System.Collections.Generic;
-using System.Threading.Tasks;
-using System.Text;
-using System.Linq;
-using System.IO;
-using System.Threading;
 
 namespace Cajero
 {
@@ -13,11 +7,12 @@ namespace Cajero
         static Program()
         {
             intentos = 3;
-            check = false;            
+            check = false;
             pantalla = new PantallaText();
-            
+
         }
-              
+
+        private const ConsoleColor yellow = ConsoleColor.Yellow;
         private static readonly PantallaText pantalla;
         private static int intentos;
         static bool check;
@@ -27,10 +22,9 @@ namespace Cajero
         {
 
             pantalla.SettingsConsole();
-            
+
             do
             {
-                
                 pantalla.PrintScreenFrame();
                 pantalla.PrintTextInputPassword();
 
@@ -45,12 +39,13 @@ namespace Cajero
             switch (intentos)
             {
                 case 0:
-                    Console.WriteLine("\nHa excedido el numero de intentos."); break;
+                    Console.ForegroundColor = yellow;
+                    Console.SetCursorPosition(4, 18);
+                    Console.WriteLine("Ha excedido el numero de intentos."); break;
 
                 default:
                     MenuAction();
                     pantalla.PrintExitMassage();
-
                     break;
             }
 
@@ -59,80 +54,78 @@ namespace Cajero
         static void MenuAction()
         {
             ConsoleKeyInfo ckey;
-            
+
             do
             {
                 pantalla.PrintTextMenu();
 
                 ckey = Console.ReadKey(true);
-                
+
                 switch (ckey.Key)
                 {
                     case ConsoleKey.D1:
 
-                            pantalla.PrintSelected(ckey);
-
-                            try
-                            {                                
-                                pantalla.Withdraw(double.Parse(Console.ReadLine()));
-                                Console.ReadKey();
-                            }
-                            catch (FormatException)
-                            {
-                                Console.SetCursorPosition(29, 7);
-                                Console.Write("Dato invalido!");
-                                Console.ReadKey();
-                            }
-                            break;
+                        pantalla.PrintSelected(ckey);
+                        try
+                        {
+                            pantalla.Withdraw(double.Parse(Console.ReadLine()));
+                            Console.ReadKey();
+                        }
+                        catch (FormatException)
+                        {
+                            Console.SetCursorPosition(29, 7);
+                            Console.Write("Dato invalido!");
+                            Console.ReadKey();
+                        }
+                        break;
 
                     case ConsoleKey.D2:
 
-                            pantalla.PrintSelected(ckey);
-
-                            try
-                            {
-                                pantalla.Deposit(double.Parse(Console.ReadLine()));
-                                Console.ReadKey();
-                            }
-                            catch (FormatException)
-                            {
-                                Console.SetCursorPosition(29, 7);
-                                Console.Write("Dato invalido");
-                                Console.ReadKey();
-                            }
-                            break;
+                        pantalla.PrintSelected(ckey);
+                        try
+                        {
+                            pantalla.Deposit(double.Parse(Console.ReadLine()));
+                            Console.ReadKey();
+                        }
+                        catch (FormatException)
+                        {
+                            Console.SetCursorPosition(29, 7);
+                            Console.Write("Dato invalido");
+                            Console.ReadKey();
+                        }
+                        break;
 
                     case ConsoleKey.D3:
-                                                    
-                            pantalla.PrintSelected(ckey);
-                            pantalla.GetSaldo();
-                            Console.ReadKey();
-                            break;
+
+                        pantalla.PrintSelected(ckey);
+                        pantalla.GetSaldo();
+                        Console.ReadKey();
+                        break;
 
                     case ConsoleKey.D4:
-                                                    
-                            pantalla.PrintSelected(ckey);
-                            pantalla.ConsultMoving();
-                            Console.ReadKey();
-                            break;
+
+                        pantalla.PrintSelected(ckey);
+                        pantalla.ConsultMoving();
+                        Console.ReadKey();
+                        break;
 
                     case ConsoleKey.D5:
 
-                            pantalla.PrintSelected(ckey);
-                            pantalla.ChangePassword(Console.ReadLine());
-                            Console.SetCursorPosition(22, 8);
-                            Console.Write("Cambio de contraseña exitoso.");
-                            Console.ReadKey();
-                            break;
+                        pantalla.PrintSelected(ckey);
+                        pantalla.ChangePassword(Console.ReadLine());
+                        Console.SetCursorPosition(22, 8);
+                        Console.Write("Cambio de contraseña exitoso.");
+                        Console.ReadKey();
+                        break;
 
                 }
-               
+
             } while (ckey.Key != ConsoleKey.D6);
 
         }
 
 
-        
+
 
     }
 

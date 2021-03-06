@@ -1,16 +1,16 @@
 ﻿using System;
-using System.Collections.Generic;
 using System.IO;
-using System.Text;
 
 namespace Cajero
 {
     class PantallaText : Cajero
     {
+        private const ConsoleColor cyan = ConsoleColor.Cyan;
+        private const ConsoleColor yellow = ConsoleColor.Yellow;
         private readonly string pathScreenMenu;
         private readonly string screenOptions;
         private readonly string screenFrame;
-        private  readonly string frameScreenPath;
+        private readonly string frameScreenPath;
         public PantallaText()
         {
             frameScreenPath = @"C:\Users\Los Ortegas\source\repos\Cajero\Folder pruebaFile\MarcoPantalla.txt";
@@ -23,9 +23,9 @@ namespace Cajero
 
         public void SettingsConsole()
         {
-            Console.CursorSize = 10;
-            Console.SetWindowSize(100, 30);
-            Console.ForegroundColor = ConsoleColor.Cyan;
+            Console.CursorSize = 10;            
+            Console.SetWindowSize(80, 20);
+            Console.ForegroundColor = yellow;
             Console.Title = "Bank International Console";
         }
 
@@ -42,7 +42,7 @@ namespace Cajero
             Console.SetCursorPosition(31, 5);
             Console.Write("Contraseña: ");
             Console.SetCursorPosition(33, 8);
-            Console.Write("[____]");         
+            Console.Write("[____]");
             Console.SetCursorPosition(34, 8);
         }
 
@@ -60,11 +60,10 @@ namespace Cajero
             // Situando el cursor en: Seleccione una opcion: [_]
             Console.SetCursorPosition(48, 15);
         }
-                 
+
         public void PrintExitMassage()
         {
-            Console.Clear();
-            Console.ForegroundColor = ConsoleColor.Yellow;
+            Console.Clear();            
             Console.Write(screenFrame);
             Console.SetCursorPosition(19, 8);
             Console.Write("Gracias por usar nuestros servicios");
@@ -74,7 +73,7 @@ namespace Cajero
 
         public void PrintSelected(ConsoleKeyInfo selectKey)
         {
-            switch(selectKey.Key)
+            switch (selectKey.Key)
             {
                 case ConsoleKey.D1:
 
@@ -85,7 +84,7 @@ namespace Cajero
                     Console.SetCursorPosition(27, 5);
                     Console.Write("Ingrese el monto:");
                     Console.SetCursorPosition(33, 7);
-                    Console.Write("[____]");
+                    Console.Write("[_____]");
                     Console.SetCursorPosition(34, 7);
                     break;
 
@@ -93,12 +92,12 @@ namespace Cajero
 
                     Console.Clear();
                     Console.Write(screenFrame);
-                    Console.SetCursorPosition(31, 1);   
+                    Console.SetCursorPosition(31, 1);
                     Console.Write("Deposito");
-                    Console.SetCursorPosition(23, 4);
+                    Console.SetCursorPosition(21, 4);
                     Console.Write("Ingrese el monto a Depositar.");
                     Console.SetCursorPosition(33, 7);
-                    Console.Write("[____]");
+                    Console.Write("[_____]");
                     Console.SetCursorPosition(34, 7);
                     break;
 
@@ -106,9 +105,8 @@ namespace Cajero
 
                     Console.Clear();
                     Console.Write(screenFrame);
-                    Console.SetCursorPosition(23, 1);   
-                    Console.Write("Consulta de saldo");                    
-                    
+                    Console.SetCursorPosition(28, 1);
+                    Console.Write("Consulta de saldo");
                     break;
 
                 case ConsoleKey.D4:
@@ -129,10 +127,10 @@ namespace Cajero
                     Console.SetCursorPosition(22, 5);
                     Console.Write("Ingrese una nueva contraseña");
                     Console.SetCursorPosition(33, 8);
-                    Console.Write("[____]");
+                    Console.Write("[_____]");
                     Console.SetCursorPosition(34, 8);
                     break;
-                
+
             }
 
         }
