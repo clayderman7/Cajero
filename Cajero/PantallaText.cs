@@ -12,8 +12,8 @@ namespace Cajero
         private readonly string frameScreenPath;
         public PantallaText()
         {
-            frameScreenPath = @"C:\Users\Los Ortegas\source\repos\Cajero\Folder pruebaFile\MarcoPantalla.txt";
-            pathScreenMenu = @"C:\Users\Los Ortegas\source\repos\Cajero\Folder pruebaFile\MenuOptions.txt";
+            frameScreenPath = "Cajero\Folder pruebaFile\MarcoPantalla.txt";
+            pathScreenMenu = "Cajero\Folder pruebaFile\MenuOptions.txt";
             screenFrame = File.ReadAllText(frameScreenPath);
             screenOptions = File.ReadAllText(pathScreenMenu);
             yellow = ConsoleColor.Yellow;
