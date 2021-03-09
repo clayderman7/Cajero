@@ -9,16 +9,15 @@ namespace Cajero
             intentos = 3;
             check = false;
             pantalla = new PantallaText();
-
         }
-        
+
         static readonly PantallaText pantalla;
         static int intentos;
         static bool check;
 
         // *************Password initial: 2020*****************
         static void Main(string[] args)
-        {            
+        {
             pantalla.SettingsConsole();
 
             do
@@ -36,9 +35,9 @@ namespace Cajero
 
             switch (intentos)
             {
-                case 0:                    
+                case 0:
                     Console.SetCursorPosition(4, 18);
-                    Console.WriteLine("Ha excedido el numero de intentos."); 
+                    Console.WriteLine("Ha excedido el numero de intentos.");
                     break;
 
                 default:

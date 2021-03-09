@@ -17,12 +17,12 @@ namespace Cajero
 
         public Cajero()
         {
-            this.pathPassword = @"C:\Users\Los Ortegas\source\repos\Cajero\Folder pruebaFile\PwStore.txt";
-            this.contraseña = File.ReadAllText(pathPassword);
-            this.movimientos = new List<string>();
-            this.recordMoving = null;
-            this.dateTime = DateTime.Now;
-            this.saldo = 4000.00f;
+            pathPassword = @"C:\Users\Los Ortegas\source\repos\Cajero\FolderTestFile\PwStore.txt";
+            contraseña = File.ReadAllText(pathPassword);
+            movimientos = new List<string>();
+            recordMoving = null;
+            dateTime = DateTime.Now;
+            saldo = 4000.00f;
             count = 1;
         }
 
@@ -86,6 +86,7 @@ namespace Cajero
         }
 
         public void ChangePassword(string newPassword) => File.WriteAllText(pathPassword, newPassword);
+
         public bool VerificacionDeContraseña(string contraseñaIn) => contraseñaIn == contraseña;
 
     }
