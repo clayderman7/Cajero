@@ -17,7 +17,7 @@ namespace Cajero
 
         public Cajero()
         {
-            this.pathPassword = @"C:\Users\Los Ortegas\source\repos\Cajero\Folder pruebaFile\PwStore.txt";
+            this.pathPassword = "Folder pruebaFile\PwStore.txt";
             this.contraseña = File.ReadAllText(pathPassword);
             this.movimientos = new List<string>();
             this.recordMoving = null;
