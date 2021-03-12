@@ -1,29 +1,26 @@
 ﻿using System;
 using System.IO;
+using System.Threading;
 
 namespace Cajero
 {
     class PantallaText : Cajero
     {
+
         private readonly ConsoleColor yellow;
         private readonly string pathScreenMenu;
         private readonly string screenOptions;
         private readonly string screenFrame;
         private readonly string frameScreenPath;
+
         public PantallaText()
         {
-<<<<<<< HEAD
-            frameScreenPath = @"C:\Users\Los Ortegas\source\repos\Cajero\FolderTestFile\MarcoPantalla.txt";
-            pathScreenMenu = @"C:\Users\Los Ortegas\source\repos\Cajero\FolderTestFile\MenuOptions.txt";
-=======
-            frameScreenPath = "Cajero\Folder pruebaFile\MarcoPantalla.txt";
-            pathScreenMenu = "Cajero\Folder pruebaFile\MenuOptions.txt";
->>>>>>> faa6fe1395062b5b0f35993b6a3f1f5dbf1abfa8
+            frameScreenPath = "MarcoPantalla.txt";
+            pathScreenMenu = "MenuOptions.txt";
             screenFrame = File.ReadAllText(frameScreenPath);
             screenOptions = File.ReadAllText(pathScreenMenu);
             yellow = ConsoleColor.Yellow;
-            Console.WriteLine("Iniciando pantalla!");
-
+            Console.Write("Iniciando pantalla!...");
         }
 
         public void SettingsConsole()
@@ -31,13 +28,38 @@ namespace Cajero
             Console.CursorSize = 10;
             Console.SetWindowSize(80, 20);
             Console.ForegroundColor = yellow;
-            Console.Title = "Bank International Console";
+            Console.Title = "Bank Console";
         }
 
         public void PrintScreenFrame()
         {
             Console.Clear();
             Console.Write(screenFrame);
+        }
+
+        public void PrintTextIdUser()
+        {
+            Console.SetCursorPosition(27, 1);
+            Console.Write("Ingrese Identificación");
+            Console.SetCursorPosition(30, 7);
+            Console.Write("ID: __________ ");
+            Console.SetCursorPosition(34, 7);
+
+        }
+
+        public void PrintWrongUser()
+        {
+            Console.SetCursorPosition(4, 12);
+            Console.Write("ID no registrado!");
+            Console.SetCursorPosition(4, 14);
+            Console.Write("Reintento en: ");
+
+            for (int i = 3; i >= 0; i--)
+            {
+                Console.SetCursorPosition(18, 14);
+                Console.Write(i);
+                Thread.Sleep(999);
+            }
         }
 
         public void PrintTextInputPassword()
@@ -62,7 +84,6 @@ namespace Cajero
         {
             Console.Clear();
             Console.Write(screenOptions);
-            // Situando el cursor en: Seleccione una opcion: [_]
             Console.SetCursorPosition(48, 15);
         }
 

@@ -1,4 +1,5 @@
 ﻿using System;
+using System.Threading.Tasks;
 
 namespace Cajero
 {
@@ -7,47 +8,69 @@ namespace Cajero
         static Program()
         {
             intentos = 3;
-            check = false;
             pantalla = new PantallaText();
         }
 
         static readonly PantallaText pantalla;
         static int intentos;
-        static bool check;
 
-        // *************Password initial: 2020*****************
         static void Main(string[] args)
         {
+
             pantalla.SettingsConsole();
 
-            do
+        Begin:
+
+            pantalla.PrintScreenFrame();
+            pantalla.PrintTextIdUser();
+            string InputID = Console.ReadLine().ToLower().Trim();
+
+            if (pantalla.AuthenticationUser(InputID))
             {
-                pantalla.PrintScreenFrame();
-                pantalla.PrintTextInputPassword();
+                do
+                {
+                    pantalla.PrintScreenFrame();
+                    pantalla.PrintTextInputPassword();
 
-                check = pantalla.VerificacionDeContraseña(Console.ReadLine());
-                if (check) break;
+                    try
+                    {
+                        if (pantalla.AuthenticationPassword(InputID, int.Parse(Console.ReadLine())))
+                            break;
+                    }
+                    catch (FormatException)
+                    {
+                        Console.SetCursorPosition(30, 8);
+                        Console.Write("Dato invalido!");
+                    }
 
-                intentos--;
-                pantalla.PrintWrongPassword(intentos);
+                    intentos--;
+                    pantalla.PrintWrongPassword(intentos);
 
-            } while (intentos != 0);
+                } while (intentos != 0);
 
-            switch (intentos)
-            {
-                case 0:
-                    Console.SetCursorPosition(4, 18);
-                    Console.WriteLine("Ha excedido el numero de intentos.");
-                    break;
+                switch (intentos)
+                {
+                    case 0:
+                        pantalla.PrintScreenFrame();
+                        Console.SetCursorPosition(4, 12);
+                        Console.Write("Ha excedido el numero de intentos.");
+                        Console.SetCursorPosition(4, 18);
+                        break;
 
-                default:
-                    MenuAction();
-                    pantalla.PrintExitMassage();
-                    break;
+                    default:
+                        MenuActions();
+                        pantalla.PrintExitMassage();
+                        break;
+                }
             }
-
+            else
+            {
+                pantalla.PrintWrongUser();
+                goto Begin;
+            }
         }
-        static void MenuAction()
+
+        private static void MenuActions()
         {
             ConsoleKeyInfo ckey;
 
@@ -100,7 +123,7 @@ namespace Cajero
                     case ConsoleKey.D4:
 
                         pantalla.PrintSelected(ckey);
-                        pantalla.ConsultMoving();
+                        pantalla.ConsultMovements();
                         Console.ReadKey();
                         break;
 
@@ -117,8 +140,6 @@ namespace Cajero
             } while (ckey.Key != ConsoleKey.D6);
 
         }
-
-
 
 
     }
