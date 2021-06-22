@@ -6,28 +6,26 @@ namespace Cajero
 {
     class PantallaText : Cajero
     {
-
-        private readonly ConsoleColor yellow;
+        private readonly string pathFrameScreen;
         private readonly string pathScreenMenu;
         private readonly string screenOptions;
         private readonly string screenFrame;
-        private readonly string frameScreenPath;
 
         public PantallaText()
         {
-            frameScreenPath = "MarcoPantalla.txt";
+            pathFrameScreen = "MarcoPantalla.txt";
             pathScreenMenu = "MenuOptions.txt";
-            screenFrame = File.ReadAllText(frameScreenPath);
+            screenFrame = File.ReadAllText(pathFrameScreen);
             screenOptions = File.ReadAllText(pathScreenMenu);
-            yellow = ConsoleColor.Yellow;
             Console.Write("Iniciando pantalla!...");
         }
 
         public void SettingsConsole()
         {
+            Console.CursorVisible = false;
+            Console.SetWindowSize(75, 18);
             Console.CursorSize = 10;
-            Console.SetWindowSize(80, 20);
-            Console.ForegroundColor = yellow;
+            Console.ForegroundColor = ConsoleColor.Yellow;
             Console.Title = "Bank Console";
         }
 
@@ -44,7 +42,6 @@ namespace Cajero
             Console.SetCursorPosition(30, 7);
             Console.Write("ID: __________ ");
             Console.SetCursorPosition(34, 7);
-
         }
 
         public void PrintWrongUser()
@@ -54,7 +51,7 @@ namespace Cajero
             Console.SetCursorPosition(4, 14);
             Console.Write("Reintento en: ");
 
-            for (int i = 3; i >= 0; i--)
+            for (int i = 3; i > 0; i--)
             {
                 Console.SetCursorPosition(18, 14);
                 Console.Write(i);
@@ -73,10 +70,10 @@ namespace Cajero
             Console.SetCursorPosition(34, 8);
         }
 
-        public void PrintWrongPassword(int intent)
+        public void PrintWrongPassword(int trys)
         {
             Console.SetCursorPosition(5, 12);
-            Console.Write("Contraseña incorrecta.  Intentos restantes {0}.\n\n\t\tPresione [ Enter ] para Continuar.", intent);
+            Console.Write("Contraseña incorrecta.  Intentos restantes {0}.\n\n\t\tPresione [ Enter ] para Continuar.", trys);
             Console.ReadKey();
         }
 
@@ -89,6 +86,7 @@ namespace Cajero
 
         public void PrintExitMassage()
         {
+            Console.CursorVisible = false;
             Console.Clear();
             Console.Write(screenFrame);
             Console.SetCursorPosition(19, 8);
@@ -97,12 +95,18 @@ namespace Cajero
             Console.ReadKey();
         }
 
-        public void PrintSelected(ConsoleKeyInfo selectKey)
+        public void PrintInvalidData()
         {
-            switch (selectKey.Key)
+            Console.SetCursorPosition(29, 7);
+            Console.Write("Dato invalido!");
+            Console.ReadKey();
+        }
+
+        public void PrintSelected(ConsoleKeyInfo thisKey)
+        {
+            switch (thisKey.Key)
             {
                 case ConsoleKey.D1:
-
                     Console.Clear();
                     Console.Write(screenFrame);
                     Console.SetCursorPosition(33, 1);
@@ -115,7 +119,6 @@ namespace Cajero
                     break;
 
                 case ConsoleKey.D2:
-
                     Console.Clear();
                     Console.Write(screenFrame);
                     Console.SetCursorPosition(31, 1);
@@ -128,7 +131,6 @@ namespace Cajero
                     break;
 
                 case ConsoleKey.D3:
-
                     Console.Clear();
                     Console.Write(screenFrame);
                     Console.SetCursorPosition(28, 1);
@@ -136,7 +138,6 @@ namespace Cajero
                     break;
 
                 case ConsoleKey.D4:
-
                     Console.Clear();
                     Console.Write(screenFrame);
                     Console.SetCursorPosition(25, 1);
@@ -145,7 +146,6 @@ namespace Cajero
                     break;
 
                 case ConsoleKey.D5:
-
                     Console.Clear();
                     Console.Write(screenFrame);
                     Console.SetCursorPosition(25, 1);
@@ -156,7 +156,6 @@ namespace Cajero
                     Console.Write("[_____]");
                     Console.SetCursorPosition(34, 8);
                     break;
-
             }
 
         }
